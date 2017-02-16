@@ -21,6 +21,7 @@ public class GameController : MonoBehaviour {
 
 	public void Update () {
         transform.position += Vector3.forward * gameSpeed * Time.deltaTime;
+        UpdateTarget();
         ContainTarget();
     }
 
