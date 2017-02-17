@@ -1,28 +1,46 @@
 ﻿using UnityEngine;
 
-public class MapPieceController : MonoBehaviour {
+namespace Assets.Scripts.Controllers {
+    public class MapPieceController : MonoBehaviour {
 
-    public float speed = 50f;
-    public float destroyMargin = 50f;
+        /// <summary>
+        /// The smount of space the edge must be behind ship to replace piece
+        /// </summary>
+        public float DestroyMargin = 50f;
 
-    [HideInInspector]
-    public GameObject predecessor;
+        /// <summary>
+        /// The previous piece
+        /// </summary>
+        [HideInInspector]
+        public GameObject Predecessor;
 
-    private bool spawnedNext;
+        /// <summary>
+        /// Whether or not next piece has been spawned
+        /// </summary>
+        private bool _hasSpawnedNext;
 
-	public void Update () {
-	    float pos = transform.position.z - transform.localScale.x / 2;
-	    float playerPos = GameController.Instance.player.transform.position.z - destroyMargin;
-        if (!spawnedNext && pos < playerPos) {
-	        SpawnNext();
-	    }
-	}
+        /// <summary>
+        /// Fires when game updates
+        /// </summary>
+        public void Update () {
 
-    public void SpawnNext() {
-        spawnedNext = true;
-        GameObject newPiece = Instantiate(gameObject, new Vector3(transform.position.x, transform.position.y, transform.position.z + transform.localScale.x), transform.rotation);
-        newPiece.GetComponent<MapPieceController>().predecessor = gameObject;
-        newPiece.name = gameObject.name;
-        Destroy(predecessor);
+            // Check if piece mas moved far enough to spawn next piece
+            float pos = transform.position.z - transform.localScale.x / 2;
+            float playerPos = GameController.Instance.Player.transform.position.z - DestroyMargin;
+            if (!_hasSpawnedNext && pos < playerPos) {
+                SpawnNext();
+            }
+        }
+
+        /// <summary>
+        /// Spawns next piece of the map
+        /// </summary>
+        public void SpawnNext() {
+            _hasSpawnedNext = true;
+            GameObject newPiece = Instantiate(gameObject, new Vector3(transform.position.x, transform.position.y, transform.position.z + transform.localScale.x), transform.rotation);
+            newPiece.GetComponent<MapPieceController>().Predecessor = gameObject;
+            newPiece.name = gameObject.name;
+            Destroy(Predecessor);
+        }
     }
 }

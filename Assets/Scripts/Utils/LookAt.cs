@@ -1,10 +1,18 @@
 ﻿using UnityEngine;
 
-public class LookAt : MonoBehaviour {
+namespace Assets.Scripts.Utils {
+    public class LookAt : MonoBehaviour {
 
-    public Transform target;
+        /// <summary>
+        /// Target to look at
+        /// </summary>
+        public Transform Target;
 
-	public void Update () {
-		transform.LookAt(target);
-	}
+        /// <summary>
+        /// Fires when game updates
+        /// </summary>
+        public void Update () {
+            transform.LookAt(Target);
+        }
+    }
 }
