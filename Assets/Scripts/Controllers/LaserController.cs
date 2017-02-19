@@ -9,9 +9,14 @@ namespace Assets.Scripts.Controllers {
         public float MovementSpeed = 100f;
 
         /// <summary>
-        /// Maximum time until destroyed
+        /// Maximum time until shots and effects are cleaned up
         /// </summary>
         public float TimeToLive = 5f;
+
+        /// <summary>
+        /// Damage caused by this laser
+        /// </summary>
+        public float Damage = 1f;
 
         /// <summary>
         /// Effect on collision
@@ -40,12 +45,17 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Fires when collision is detected
         /// </summary>
-        /// <param name="col"></param>
+        /// <param name="col">Object containing collision information</param>
         public void OnCollisionEnter(Collision col) {
 
             // If collision is detected, fire off effect and destroy self
-            Destroy(Instantiate(HitEffect, transform.position, Quaternion.identity), 5f);
+            Destroy(Instantiate(HitEffect, transform.position, Quaternion.identity), TimeToLive);
             Destroy(gameObject);
+
+            // If collider has health, apply damage
+            if (col.transform.GetComponent<HealthController>() != null) {
+                col.gameObject.SendMessage("Hit", Damage);
+            }
         }
     }
 }

@@ -29,6 +29,11 @@ namespace Assets.Scripts.Controllers {
         public GameObject LaserPrefab;
 
         /// <summary>
+        /// Ship model containing animations
+        /// </summary>
+        public GameObject Model;
+
+        /// <summary>
         /// Time of last shot
         /// </summary>
         private float _lastShot;
@@ -41,13 +46,27 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Fires when game updates
         /// </summary>
-        public void Update () {
+        public void Update() {
             UpdatePosition();
 
             // If fire button is pressed and appropriate amount of time has passed, shoot
             if (Input.GetButton("Fire1") && Time.time - _lastShot > ShotInterval) {
                 Fire();
             }
+        }
+
+        /// <summary>
+        /// Fires when collision is detected
+        /// </summary>
+        /// <param name="col">Object containing collision information</param>
+        public void OnCollisionEnter(Collision col) {
+
+            // If collision is with laser do damage, otherwize destroy
+            if (col.transform.GetComponent<LaserController>() != null) {
+                // TODO: Damage logic
+                return;
+            }
+            Model.GetComponent<Animation>().Play("PlayerEnter");
         }
 
         /// <summary>
@@ -71,9 +90,9 @@ namespace Assets.Scripts.Controllers {
             _lastTurret = _lastTurret + 1 >= Turrets.Length ? 0 : _lastTurret + 1;
             Transform turret = Turrets[_lastTurret];
 
-            // Instantiate shot and move it forwards to avoid internal collision
+            // Instantiate shot and ignore ship collision
             GameObject shot = Instantiate(LaserPrefab, turret.position, turret.rotation);
-            shot.transform.position += shot.transform.localScale / 2;
+            Physics.IgnoreCollision(GetComponent<Collider>(), shot.GetComponent<Collider>());
 
             // Append MovementSpeed of ship to MovementSpeed of the shot
             shot.GetComponent<LaserController>().MovementSpeed += GameController.Instance.GameSpeed;
@@ -81,5 +100,6 @@ namespace Assets.Scripts.Controllers {
             // Update timer
             _lastShot = Time.time;
         }
+
     }
 }
