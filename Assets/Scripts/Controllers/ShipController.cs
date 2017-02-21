@@ -1,6 +1,11 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.Utils;
+using UnityEngine;
 
 namespace Assets.Scripts.Controllers {
+
+    /// <summary>
+    /// Controls the functions of the player ship
+    /// </summary>
     public class ShipController : MonoBehaviour {
 
         /// <summary>
@@ -34,6 +39,11 @@ namespace Assets.Scripts.Controllers {
         public GameObject Model;
 
         /// <summary>
+        /// Script that defines the movement of the ship
+        /// </summary>
+        public LinearMovement MovementScript;
+
+        /// <summary>
         /// Time of last shot
         /// </summary>
         private float _lastShot;
@@ -42,6 +52,15 @@ namespace Assets.Scripts.Controllers {
         /// Index of last turret shot
         /// </summary>
         private int _lastTurret;
+
+        /// <summary>
+        /// Fires when game is started, after Awake
+        /// </summary>
+        public void Start() {
+
+            // Set the player to be this script
+            GameController.Instance.Player = this;
+        }
 
         /// <summary>
         /// Fires when game updates
@@ -95,7 +114,7 @@ namespace Assets.Scripts.Controllers {
             Physics.IgnoreCollision(GetComponent<Collider>(), shot.GetComponent<Collider>());
 
             // Append MovementSpeed of ship to MovementSpeed of the shot
-            shot.GetComponent<LaserController>().MovementSpeed += GameController.Instance.GameSpeed;
+            shot.GetComponent<LaserController>().MovementSpeed += MovementScript.Speed.z;
 
             // Update timer
             _lastShot = Time.time;

@@ -3,20 +3,20 @@
 namespace Assets.Scripts.Utils {
 
     /// <summary>
-    /// Forces object to look at another object
+    /// Applies linear movement to object
     /// </summary>
-    public class LookAt : MonoBehaviour {
+    public class LinearMovement : MonoBehaviour {
 
         /// <summary>
-        /// Target to look at
+        /// Speed of movement in each direction
         /// </summary>
-        public Transform Target;
+        public Vector3 Speed;
 
         /// <summary>
         /// Fires when game updates
         /// </summary>
         public void Update () {
-            transform.LookAt(Target);
+            transform.position += Speed * Time.deltaTime;
         }
     }
 }

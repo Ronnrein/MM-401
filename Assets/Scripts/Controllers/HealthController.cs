@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
 namespace Assets.Scripts.Controllers {
+
+    /// <summary>
+    /// Controls the health and damage of an object
+    /// </summary>
     public class HealthController : MonoBehaviour {
 
         /// <summary>

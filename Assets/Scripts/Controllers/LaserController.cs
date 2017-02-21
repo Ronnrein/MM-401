@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
 namespace Assets.Scripts.Controllers {
+
+    /// <summary>
+    /// Controls laser shots
+    /// </summary>
     public class LaserController : MonoBehaviour {
 
         /// <summary>

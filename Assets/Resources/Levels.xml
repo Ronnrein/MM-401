@@ -1,9 +1,17 @@
 <LevelCollection>
-  <Levels>
-    <Level id="1">
-      <Start>TrenchStart</Start>
-      <End></End>
-      
-    </Level>
-  </Levels>
+  <Chapters>
+    <Chapter id="1">
+      <Levels>
+        <Level id="1">
+          <Text>Chapter 1 level 1 text</Text>
+          <PiecePath>Chapter1</PiecePath>
+          <StartPiece>_Start</StartPiece>
+          <EndPiece>_End</EndPiece>
+          <SpecialPieces>
+            
+          </SpecialPieces>
+        </Level>
+      </Levels>
+    </Chapter>
+  </Chapters>
 </LevelCollection>

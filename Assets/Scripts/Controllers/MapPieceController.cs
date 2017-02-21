@@ -1,6 +1,10 @@
 ﻿using UnityEngine;
 
 namespace Assets.Scripts.Controllers {
+
+    /// <summary>
+    /// Controls spawning of map pieces
+    /// </summary>
     public class MapPieceController : MonoBehaviour {
 
         /// <summary>
@@ -37,10 +41,22 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         public void SpawnNext() {
             _hasSpawnedNext = true;
-            GameObject newPiece = Instantiate(gameObject, new Vector3(transform.position.x, transform.position.y, transform.position.z + transform.localScale.x), transform.rotation);
+            Vector3 position = new Vector3(
+                transform.position.x,
+                transform.position.y,
+                transform.position.z + transform.localScale.x
+            );
+            GameObject prefab = GameController.Instance.CurrentLevel.GetRandomPrefab();
+            GameObject newPiece = Instantiate(prefab, position, transform.rotation);
             newPiece.GetComponent<MapPieceController>().Predecessor = gameObject;
             newPiece.name = gameObject.name;
             Destroy(Predecessor);
         }
+
+        public static void SpawnFirst() {
+            GameObject prefab = GameController.Instance.CurrentLevel.StartPrefab;
+            Instantiate(prefab, prefab.transform.position, prefab.transform.rotation);
+        }
+
     }
 }
