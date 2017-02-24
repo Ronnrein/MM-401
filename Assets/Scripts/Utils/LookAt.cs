@@ -13,10 +13,15 @@ namespace Assets.Scripts.Utils {
         public Transform Target;
 
         /// <summary>
+        /// Reverse direction
+        /// </summary>
+        public bool Reverse = false;
+
+        /// <summary>
         /// Fires when game updates
         /// </summary>
         public void Update () {
-            transform.LookAt(Target);
+            transform.LookAt(Reverse ? 2 * transform.position - Target.position : Target.position);
         }
     }
 }

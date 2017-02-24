@@ -24,6 +24,11 @@ namespace Assets.Scripts.Controllers {
         public Transform MovementTarget;
 
         /// <summary>
+        /// Target to shoot towards
+        /// </summary>
+        public Transform TargetReticule;
+
+        /// <summary>
         /// Turrets of the ship
         /// </summary>
         public Transform[] Turrets;
@@ -82,7 +87,7 @@ namespace Assets.Scripts.Controllers {
             UpdatePosition();
 
             // If fire button is pressed and appropriate amount of time has passed, shoot
-            if (Input.GetButton("Fire1") && Time.time - _lastShot > ShotInterval) {
+            if (!IsAnimated && Input.GetButton("Fire1") && Time.time - _lastShot > ShotInterval) {
                 Fire();
             }
         }
@@ -126,6 +131,10 @@ namespace Assets.Scripts.Controllers {
             // Instantiate shot and ignore ship collision
             GameObject shot = Instantiate(LaserPrefab, turret.position, turret.rotation);
             Physics.IgnoreCollision(GetComponent<Collider>(), shot.GetComponent<Collider>());
+
+            // Rotate shot towards target reticule and add speed of ship to shot
+            shot.transform.LookAt(TargetReticule);
+            shot.GetComponent<LinearMovement>().Speed = MovementScript.Speed;
 
             // Append MovementSpeed of ship to MovementSpeed of the shot
             shot.GetComponent<LaserController>().MovementSpeed += MovementScript.Speed.z;
