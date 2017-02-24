@@ -23,26 +23,41 @@ namespace Assets.Scripts.Controllers {
         public float TargetMovementSpeed = 1f;
 
         /// <summary>
+        /// Original starting position of movement target
+        /// </summary>
+        private Vector3 _originalLocalTargetPosition;
+
+        /// <summary>
         /// Fires when game is started, after Awake
         /// </summary>
         public void Start() {
 
             // Set movement controller to be this script
             GameController.Instance.Movement = this;
+            _originalLocalTargetPosition = MovementTarget.localPosition;
         }
 
         /// <summary>
         /// Fires when game updates
         /// </summary>
         public void Update() {
-            UpdateTarget();
-            ContainTarget();
+            if (!GameController.Instance.Player.IsAnimated) {
+                UpdateTarget();
+                ContainTarget();
+            }
+        }
+
+        /// <summary>
+        /// Resets movement target to starting position
+        /// </summary>
+        public void ResetTarget() {
+            MovementTarget.localPosition = _originalLocalTargetPosition;
         }
 
         /// <summary>
         /// Forces the target to stay within the boundaries of the movement area quad
         /// </summary>
-        public void ContainTarget() {
+        private void ContainTarget() {
             float xDiff = 0f;
             float yDiff = 0f;
             if (MovementTarget.position.x > transform.position.x + transform.localScale.x / 2) {
@@ -67,7 +82,7 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Update position of movement target
         /// </summary>
-        public void UpdateTarget() {
+        private void UpdateTarget() {
             Vector3 movement = GetInput() * TargetMovementSpeed;
             MovementTarget.position += movement;
         }
@@ -76,7 +91,7 @@ namespace Assets.Scripts.Controllers {
         /// Get input from directional and mouse axis
         /// </summary>
         /// <returns>Normalized input</returns>
-        public Vector3 GetInput() {
+        private Vector3 GetInput() {
             return new Vector3(
                 Input.GetAxis("Horizontal") + Input.GetAxis("Mouse X") * MouseMultiplier,
                 Input.GetAxis("Vertical") + Input.GetAxis("Mouse Y") * MouseMultiplier,

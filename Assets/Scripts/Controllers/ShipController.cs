@@ -54,12 +54,25 @@ namespace Assets.Scripts.Controllers {
         private int _lastTurret;
 
         /// <summary>
+        /// Animation component of model
+        /// </summary>
+        private Animation _animation;
+
+        /// <summary>
+        /// Whether or not the ship is currently animated
+        /// </summary>
+        public bool IsAnimated {
+            get { return _animation.isPlaying; }
+        }
+
+        /// <summary>
         /// Fires when game is started, after Awake
         /// </summary>
         public void Start() {
 
             // Set the player to be this script
             GameController.Instance.Player = this;
+            _animation = Model.GetComponent<Animation>();
         }
 
         /// <summary>
@@ -85,7 +98,8 @@ namespace Assets.Scripts.Controllers {
                 // TODO: Damage logic
                 return;
             }
-            Model.GetComponent<Animation>().Play("PlayerEnter");
+            _animation.Play("PlayerEnter");
+            GameController.Instance.Movement.ResetTarget();
         }
 
         /// <summary>
