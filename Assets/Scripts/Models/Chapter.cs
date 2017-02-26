@@ -21,5 +21,12 @@ namespace Assets.Scripts.Models {
         [XmlArrayItem("Level")]
         public List<Level> Levels;
 
+        /// <summary>
+        /// String representation of chapter
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() {
+            return "Chapter " + Id;
+        }
     }
 }

@@ -21,7 +21,9 @@ namespace Assets.Scripts.Utils {
         /// Fires when game updates
         /// </summary>
         public void Update () {
-            transform.LookAt(Reverse ? 2 * transform.position - Target.position : Target.position);
+            if (Target != null) {
+                transform.LookAt(Reverse ? 2 * transform.position - Target.position : Target.position);
+            }
         }
     }
 }

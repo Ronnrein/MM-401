@@ -64,6 +64,14 @@ namespace Assets.Scripts.Models {
         }
 
         /// <summary>
+        /// String representation of level
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString() {
+            return "Level " + Id;
+        }
+
+        /// <summary>
         /// Get a prefab of this level with the specified name
         /// </summary>
         /// <param name="name">Name of the prefab</param>

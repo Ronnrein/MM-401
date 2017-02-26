@@ -11,6 +11,41 @@
             
           </SpecialPieces>
         </Level>
+        <Level id="2">
+          <Text>Chapter 1 level 2 text</Text>
+          <PiecePath>Chapter1</PiecePath>
+          <StartPiece>_Start</StartPiece>
+          <EndPiece>_End</EndPiece>
+          <SpecialPieces>
+
+          </SpecialPieces>
+        </Level>
+      </Levels>
+    </Chapter>
+    <Chapter id="2">
+      <Levels>
+        <Level id="1">
+          <Text>Chapter 2 level 1 text</Text>
+          <PiecePath>Chapter1</PiecePath>
+          <StartPiece>_Start</StartPiece>
+          <EndPiece>_End</EndPiece>
+          <SpecialPieces>
+
+          </SpecialPieces>
+        </Level>
+      </Levels>
+    </Chapter>
+    <Chapter id="3">
+      <Levels>
+        <Level id="1">
+          <Text>Chapter 3 level 1 text</Text>
+          <PiecePath>Chapter1</PiecePath>
+          <StartPiece>_Start</StartPiece>
+          <EndPiece>_End</EndPiece>
+          <SpecialPieces>
+
+          </SpecialPieces>
+        </Level>
       </Levels>
     </Chapter>
   </Chapters>

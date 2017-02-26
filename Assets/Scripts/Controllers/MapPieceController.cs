@@ -46,7 +46,7 @@ namespace Assets.Scripts.Controllers {
                 transform.position.y,
                 transform.position.z + transform.localScale.x
             );
-            GameObject prefab = GameController.Instance.CurrentLevel.GetRandomPrefab();
+            GameObject prefab = GameController.CurrentLevel.GetRandomPrefab();
             GameObject newPiece = Instantiate(prefab, position, transform.rotation);
             newPiece.GetComponent<MapPieceController>().Predecessor = gameObject;
             newPiece.name = gameObject.name;
@@ -54,7 +54,7 @@ namespace Assets.Scripts.Controllers {
         }
 
         public static void SpawnFirst() {
-            GameObject prefab = GameController.Instance.CurrentLevel.StartPrefab;
+            GameObject prefab = GameController.CurrentLevel.StartPrefab;
             Instantiate(prefab, prefab.transform.position, prefab.transform.rotation);
         }
 

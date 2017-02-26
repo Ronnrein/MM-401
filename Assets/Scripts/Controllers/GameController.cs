@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Assets.Scripts.Models;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.Controllers {
 
@@ -12,26 +13,27 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// The ship controller
         /// </summary>
-        [HideInInspector]
         public ShipController Player;
 
         /// <summary>
         /// The movement controller
         /// </summary>
-        [HideInInspector]
         public MovementController Movement;
 
         /// <summary>
         /// Current level
         /// </summary>
-        [HideInInspector]
-        public Level CurrentLevel;
+        public static Level CurrentLevel;
 
         /// <summary>
         /// Current chapter
         /// </summary>
-        [HideInInspector]
-        public Chapter CurrentChapter;
+        public static Chapter CurrentChapter;
+
+        /// <summary>
+        /// Level text object
+        /// </summary>
+        public TextMesh LevelText;
 
         /// <summary>
         /// Static instance of this class
@@ -44,20 +46,23 @@ namespace Assets.Scripts.Controllers {
         public void Awake() {
 
             // Create a static instance of this class and lock cursor
-            if (Instance == null) {
-                Instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else if (Instance != this) {
+            Instance = this;
 
-                // If singleton already exists, destroy this to enforce singleton pattern
-                Destroy(gameObject);
-            }
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            CurrentChapter = LevelContainer.Instance.Chapters.Single(x => x.Id == 1);
-            CurrentLevel = CurrentChapter.Levels.Single(x => x.Id == 1);
+            LevelText.text = "Chapter " + CurrentChapter.Id + ": Level " + CurrentLevel.Id;
             MapPieceController.SpawnFirst();
+        }
+
+        /// <summary>
+        /// Load and start a level
+        /// </summary>
+        /// <param name="chapter">Chapter to load</param>
+        /// <param name="level">Level to load</param>
+        public static void LoadLevel(Chapter chapter, Level level) {
+            CurrentChapter = chapter;
+            CurrentLevel = level;
+            SceneManager.LoadScene("Scenes/Main");
         }
 
     }

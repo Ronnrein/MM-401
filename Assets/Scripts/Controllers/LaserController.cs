@@ -40,7 +40,7 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Fires when game updates
         /// </summary>
-        public void Update () {
+        public void Update() {
 
             // Move shot forward
             transform.position += transform.forward * MovementSpeed * Time.deltaTime;
