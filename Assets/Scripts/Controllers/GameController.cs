@@ -36,6 +36,11 @@ namespace Assets.Scripts.Controllers {
         public TextMesh LevelText;
 
         /// <summary>
+        /// Gameobject of pause menu
+        /// </summary>
+        public GameObject PauseMenu;
+
+        /// <summary>
         /// Static instance of this class
         /// </summary>
         public static GameController Instance { get; private set; }
@@ -45,13 +50,47 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         public void Awake() {
 
-            // Create a static instance of this class and lock cursor
+            // Create a static instance of this class
             Instance = this;
 
+            // Start first level if none is selected
+            if (CurrentChapter == null) {
+                CurrentChapter = LevelContainer.Instance.Chapters.First();
+                CurrentLevel = CurrentChapter.Levels.First();
+            }
+
+            // Set up scene
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             LevelText.text = "Chapter " + CurrentChapter.Id + ": Level " + CurrentLevel.Id;
             MapPieceController.SpawnFirst();
+        }
+
+        /// <summary>
+        /// Fires when game updates
+        /// </summary>
+        public void Update() {
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                TogglePause();
+            }
+        }
+
+        /// <summary>
+        /// Toggles the pause state and menu
+        /// </summary>
+        public void TogglePause() {
+            PauseMenu.SetActive(!PauseMenu.activeSelf);
+            Time.timeScale = 1 - Time.timeScale;
+            Cursor.visible = !Cursor.visible;
+            Cursor.lockState = Cursor.visible ? CursorLockMode.None : CursorLockMode.Locked;
+        }
+
+        /// <summary>
+        /// Loads main menu
+        /// </summary>
+        public void LoadMainMenu() {
+            Time.timeScale = 1;
+            SceneManager.LoadScene("Scenes/Menu");
         }
 
         /// <summary>

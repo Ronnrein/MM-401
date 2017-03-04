@@ -29,7 +29,7 @@ namespace Assets.Scripts.Controllers {
         public void Update () {
 
             // Check if piece mas moved far enough to spawn next piece
-            float pos = transform.position.z - transform.localScale.x / 2;
+            float pos = transform.position.z - transform.localScale.z / 2;
             float playerPos = GameController.Instance.Player.transform.position.z - DestroyMargin;
             if (!_hasSpawnedNext && pos < playerPos) {
                 SpawnNext();
@@ -44,7 +44,7 @@ namespace Assets.Scripts.Controllers {
             Vector3 position = new Vector3(
                 transform.position.x,
                 transform.position.y,
-                transform.position.z + transform.localScale.x
+                transform.position.z + transform.localScale.z
             );
             GameObject prefab = GameController.CurrentLevel.GetRandomPrefab();
             GameObject newPiece = Instantiate(prefab, position, transform.rotation);

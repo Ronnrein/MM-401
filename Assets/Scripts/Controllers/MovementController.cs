@@ -41,7 +41,7 @@ namespace Assets.Scripts.Controllers {
         /// Fires when game updates
         /// </summary>
         public void Update() {
-            if (!GameController.Instance.Player.IsAnimated) {
+            if (!GameController.Instance.Player.IsAnimated && Time.timeScale != 0) {
                 UpdateTarget();
                 ContainTarget();
             }

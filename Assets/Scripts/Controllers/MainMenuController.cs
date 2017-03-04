@@ -50,7 +50,7 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Fires when game is started, after Awake
         /// </summary>
-        public void Start () {
+        public void Start() {
 		    CreateMenuButtons();
         }
 
@@ -109,6 +109,8 @@ namespace Assets.Scripts.Controllers {
             });
             GameObject levelSelectBtn = CreateButton("Level select", new Vector3(0, -offset, 0), MainBtnContainer);
             levelSelectBtn.GetComponent<Button>().onClick.AddListener(ToggleChapterButtons);
+            GameObject quitBtn = CreateButton("Quit", new Vector3(0, -offset * 2, 0), MainBtnContainer);
+            quitBtn.GetComponent<Button>().onClick.AddListener(Application.Quit);
         }
 
         /// <summary>
