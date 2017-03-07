@@ -3,48 +3,9 @@
     <Chapter id="1">
       <Levels>
         <Level id="1">
+          <Name>Chapter 1: Level 1</Name>
           <Text>Chapter 1 level 1 text</Text>
-          <PiecePath>Chapter1</PiecePath>
-          <StartPiece>_Start</StartPiece>
-          <EndPiece>_End</EndPiece>
-          <SpecialPieces>
-            
-          </SpecialPieces>
-        </Level>
-        <Level id="2">
-          <Text>Chapter 1 level 2 text</Text>
-          <PiecePath>Chapter1</PiecePath>
-          <StartPiece>_Start</StartPiece>
-          <EndPiece>_End</EndPiece>
-          <SpecialPieces>
-
-          </SpecialPieces>
-        </Level>
-      </Levels>
-    </Chapter>
-    <Chapter id="2">
-      <Levels>
-        <Level id="1">
-          <Text>Chapter 2 level 1 text</Text>
-          <PiecePath>Chapter1</PiecePath>
-          <StartPiece>_Start</StartPiece>
-          <EndPiece>_End</EndPiece>
-          <SpecialPieces>
-
-          </SpecialPieces>
-        </Level>
-      </Levels>
-    </Chapter>
-    <Chapter id="3">
-      <Levels>
-        <Level id="1">
-          <Text>Chapter 3 level 1 text</Text>
-          <PiecePath>Chapter1</PiecePath>
-          <StartPiece>_Start</StartPiece>
-          <EndPiece>_End</EndPiece>
-          <SpecialPieces>
-
-          </SpecialPieces>
+          <Scene>Chapter01/Level01</Scene>
         </Level>
       </Levels>
     </Chapter>

@@ -1,4 +1,5 @@
-﻿using Assets.Scripts.Utils;
+﻿using System.Collections;
+using Assets.Scripts.Utils;
 using UnityEngine;
 
 namespace Assets.Scripts.Controllers {
@@ -38,6 +39,8 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         public GameObject LaserPrefab;
 
+        public AudioClip LaserAudio;
+
         /// <summary>
         /// Ship model containing animations
         /// </summary>
@@ -59,6 +62,11 @@ namespace Assets.Scripts.Controllers {
         private int _lastTurret;
 
         /// <summary>
+        /// Audio source component
+        /// </summary>
+        private AudioSource _audioSource;
+
+        /// <summary>
         /// Animation component of model
         /// </summary>
         private Animation _animation;
@@ -78,6 +86,7 @@ namespace Assets.Scripts.Controllers {
             // Set the player to be this script
             GameController.Instance.Player = this;
             _animation = Model.GetComponent<Animation>();
+            _audioSource = GetComponent<AudioSource>();
         }
 
         /// <summary>
@@ -105,6 +114,14 @@ namespace Assets.Scripts.Controllers {
             }
             _animation.Play("PlayerEnter");
             GameController.Instance.Movement.ResetTarget();
+        }
+
+        /// <summary>
+        /// Play ending animation
+        /// </summary>
+        public void PlayEndingAnimation() {
+            _animation.Play("PlayerLeave");
+            StartCoroutine(WaitForEndingAnimation(_animation["PlayerLeave"].length));
         }
 
         /// <summary>
@@ -141,6 +158,19 @@ namespace Assets.Scripts.Controllers {
 
             // Update timer
             _lastShot = Time.time;
+
+            // Fire sound
+            _audioSource.PlayOneShot(LaserAudio);
+        }
+
+        /// <summary>
+        /// Waits for ending animation to finish
+        /// </summary>
+        /// <param name="seconds">Seconds to wait</param>
+        /// <returns>Enumerator</returns>
+        private IEnumerator WaitForEndingAnimation(float seconds) {
+            yield return new WaitForSeconds(seconds);
+            GameController.EndLevel();
         }
 
     }

@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Assets.Scripts.Models;
+using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -41,6 +42,11 @@ namespace Assets.Scripts.Controllers {
         public GameObject PauseMenu;
 
         /// <summary>
+        /// The z value the ship has to reach before the game ends
+        /// </summary>
+        private float _endGameZPosition = float.MaxValue;
+
+        /// <summary>
         /// Static instance of this class
         /// </summary>
         public static GameController Instance { get; private set; }
@@ -62,8 +68,14 @@ namespace Assets.Scripts.Controllers {
             // Set up scene
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            LevelText.text = "Chapter " + CurrentChapter.Id + ": Level " + CurrentLevel.Id;
-            MapPieceController.SpawnFirst();
+            LevelText.text = CurrentLevel.Name;
+
+            // Try to get the position of the end of the level
+            LevelSequencer sequencer = GetComponent<LevelSequencer>();
+            if (sequencer != null) {
+                Transform last = sequencer.Pieces.Last();
+                _endGameZPosition = last.position.z - last.localScale.z / 2;
+            }
         }
 
         /// <summary>
@@ -72,6 +84,9 @@ namespace Assets.Scripts.Controllers {
         public void Update() {
             if (Input.GetKeyDown(KeyCode.Escape)) {
                 TogglePause();
+            }
+            if (Player.transform.position.z > _endGameZPosition) {
+                Player.PlayEndingAnimation();
             }
         }
 
@@ -86,10 +101,19 @@ namespace Assets.Scripts.Controllers {
         }
 
         /// <summary>
+        /// Loads main menu, non static version for UI
+        /// </summary>
+        public void UiLoadMainMenu() {
+            LoadMainMenu();
+        }
+
+        /// <summary>
         /// Loads main menu
         /// </summary>
-        public void LoadMainMenu() {
+        public static void LoadMainMenu() {
             Time.timeScale = 1;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             SceneManager.LoadScene("Scenes/Menu");
         }
 
@@ -101,7 +125,14 @@ namespace Assets.Scripts.Controllers {
         public static void LoadLevel(Chapter chapter, Level level) {
             CurrentChapter = chapter;
             CurrentLevel = level;
-            SceneManager.LoadScene("Scenes/Main");
+            SceneManager.LoadScene("Scenes/Levels/" + level.Scene);
+        }
+
+        /// <summary>
+        /// Ends level
+        /// </summary>
+        public static void EndLevel() {
+            LoadMainMenu();
         }
 
     }
