@@ -39,6 +39,9 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         public GameObject LaserPrefab;
 
+        /// <summary>
+        /// Audio for laser shot
+        /// </summary>
         public AudioClip LaserAudio;
 
         /// <summary>
@@ -50,6 +53,12 @@ namespace Assets.Scripts.Controllers {
         /// Script that defines the movement of the ship
         /// </summary>
         public LinearMovement MovementScript;
+
+        /// <summary>
+        /// Velocity of ship
+        /// </summary>
+        [HideInInspector]
+        public ManualVelocity ManualVelocity;
 
         /// <summary>
         /// Time of last shot
@@ -87,6 +96,7 @@ namespace Assets.Scripts.Controllers {
             GameController.Instance.Player = this;
             _animation = Model.GetComponent<Animation>();
             _audioSource = GetComponent<AudioSource>();
+            ManualVelocity = GetComponent<ManualVelocity>();
         }
 
         /// <summary>
@@ -97,7 +107,7 @@ namespace Assets.Scripts.Controllers {
 
             // If fire button is pressed and appropriate amount of time has passed, shoot
             if (!IsAnimated && Input.GetButton("Fire1") && Time.time - _lastShot > ShotInterval) {
-                Fire();
+                Shoot();
             }
         }
 
@@ -139,7 +149,7 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Fires a laser beam from one of the turrets
         /// </summary>
-        private void Fire() {
+        private void Shoot() {
 
             // Cycle through turrets
             _lastTurret = _lastTurret + 1 >= Turrets.Length ? 0 : _lastTurret + 1;
@@ -159,7 +169,7 @@ namespace Assets.Scripts.Controllers {
             // Update timer
             _lastShot = Time.time;
 
-            // Fire sound
+            // Shoot sound
             _audioSource.PlayOneShot(LaserAudio);
         }
 
