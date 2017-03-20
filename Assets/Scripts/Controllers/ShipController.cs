@@ -160,11 +160,7 @@ namespace Assets.Scripts.Controllers {
             Physics.IgnoreCollision(GetComponent<Collider>(), shot.GetComponent<Collider>());
 
             // Rotate shot towards target reticule and add speed of ship to shot
-            shot.transform.LookAt(TargetReticule);
-            shot.GetComponent<LinearMovement>().Speed = MovementScript.Speed;
-
-            // Append MovementSpeed of ship to MovementSpeed of the shot
-            shot.GetComponent<LaserController>().MovementSpeed += MovementScript.Speed.z;
+            shot.transform.LookAt(GetAimTarget());
 
             // Update timer
             _lastShot = Time.time;
@@ -181,6 +177,15 @@ namespace Assets.Scripts.Controllers {
         private IEnumerator WaitForEndingAnimation(float seconds) {
             yield return new WaitForSeconds(seconds);
             GameController.EndLevel();
+        }
+
+        private Vector3 GetAimTarget() {
+            Ray ray = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(TargetReticule.position));
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit)) {
+                return hit.point;
+            }
+            return TargetReticule.position;
         }
 
     }
