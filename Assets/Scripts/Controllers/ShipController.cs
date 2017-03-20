@@ -193,9 +193,6 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         private void Destroyed() {
             GameController.Instance.Lives--;
-            if (GameController.Instance.Lives == 0) {
-                GameController.LoadMainMenu();
-            }
             ResetShip();
         }
 

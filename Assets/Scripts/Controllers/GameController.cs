@@ -38,6 +38,16 @@ namespace Assets.Scripts.Controllers {
         public GameObject PauseMenu;
 
         /// <summary>
+        /// The text in the pause menu
+        /// </summary>
+        public Text PauseMenuText;
+
+        /// <summary>
+        /// The button to continue in the pause menu
+        /// </summary>
+        public GameObject PauseMenuContinueButton;
+
+        /// <summary>
         /// Text representing player lives
         /// </summary>
         public Text LivesText;
@@ -50,6 +60,9 @@ namespace Assets.Scripts.Controllers {
             set {
                 _lives = value;
                 LivesText.text = "Lives: " + _lives;
+                if (_lives <= 0) {
+                    GameOver();
+                }
             }
         }
 
@@ -120,7 +133,10 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Toggles the pause state and menu
         /// </summary>
-        public void TogglePause() {
+        public void TogglePause(bool ignoreLives = false) {
+            if (!ignoreLives && Lives <= 0) {
+                return;
+            }
             PauseMenu.SetActive(!PauseMenu.activeSelf);
             Time.timeScale = 1 - Time.timeScale;
             Cursor.visible = !Cursor.visible;
@@ -145,6 +161,16 @@ namespace Assets.Scripts.Controllers {
         }
 
         /// <summary>
+        /// Restarts current level
+        /// </summary>
+        public void RestartLevel() {
+            Time.timeScale = 1;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        /// <summary>
         /// Load and start a level
         /// </summary>
         /// <param name="chapter">Chapter to load</param>
@@ -159,7 +185,17 @@ namespace Assets.Scripts.Controllers {
         /// Ends level
         /// </summary>
         public static void EndLevel() {
+            // TODO, GO TO NEW LEVEL
             LoadMainMenu();
+        }
+
+        /// <summary>
+        /// Shows game over screen
+        /// </summary>
+        private void GameOver() {
+            PauseMenuText.text = "Game over";
+            Destroy(PauseMenuContinueButton);
+            TogglePause(true);
         }
 
     }
