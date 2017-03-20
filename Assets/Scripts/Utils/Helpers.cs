@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using Assets.Scripts.Controllers;
 using UnityEngine;
 
 namespace Assets.Scripts.Utils {
@@ -72,7 +73,23 @@ namespace Assets.Scripts.Utils {
             return Mathf.Max(-b / (2f * a), 0f);
         }
 
-        public static IEnumerator CallAfter(Action action, float time) {
+        /// <summary>
+        /// Starts a coroutine from gamecontroller that calls method after given seconds
+        /// </summary>
+        /// <param name="action">Method to call</param>
+        /// <param name="time">Time to wait</param>
+        /// <returns></returns>
+        public static void CallAfter(Action action, float time) {
+            GameController.Instance.StartCoroutine(CallAfterEnumerator(action, time));
+        }
+
+        /// <summary>
+        /// Internal enumerator function for coroutine
+        /// </summary>
+        /// <param name="action">Method to call</param>
+        /// <param name="time">Time to wait</param>
+        /// <returns></returns>
+        private static IEnumerator CallAfterEnumerator(Action action, float time) {
             yield return new WaitForSeconds(time);
             action();
         }

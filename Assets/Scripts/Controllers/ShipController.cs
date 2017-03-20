@@ -137,7 +137,7 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         public void PlayEndingAnimation() {
             _animation.Play("PlayerLeave");
-            StartCoroutine(Helpers.CallAfter(GameController.EndLevel, _animation["PlayerLeave"].length));
+            Helpers.CallAfter(GameController.EndLevel, _animation["PlayerLeave"].length);
         }
 
         /// <summary>
@@ -207,7 +207,7 @@ namespace Assets.Scripts.Controllers {
             GameController.Instance.Movement.ResetTarget();
             GetComponent<HealthController>().ResetHealth();
             GetComponent<Collider>().enabled = false;
-            StartCoroutine(Helpers.CallAfter(AnimationDone, _animation["PlayerEnter"].length));
+            Helpers.CallAfter(AnimationDone, _animation["PlayerEnter"].length);
         }
 
         /// <summary>
