@@ -3,6 +3,7 @@ using Assets.Scripts.Models;
 using Assets.Scripts.Utils;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers {
 
@@ -10,6 +11,11 @@ namespace Assets.Scripts.Controllers {
     /// Game controller that persists through levels
     /// </summary>
     public class GameController : MonoBehaviour {
+
+        /// <summary>
+        /// Lives of player
+        /// </summary>
+        public int StartingLives = 3;
 
         /// <summary>
         /// The ship controller
@@ -22,16 +28,6 @@ namespace Assets.Scripts.Controllers {
         public MovementController Movement;
 
         /// <summary>
-        /// Current level
-        /// </summary>
-        public static Level CurrentLevel;
-
-        /// <summary>
-        /// Current chapter
-        /// </summary>
-        public static Chapter CurrentChapter;
-
-        /// <summary>
         /// Level text object
         /// </summary>
         public TextMesh LevelText;
@@ -42,14 +38,42 @@ namespace Assets.Scripts.Controllers {
         public GameObject PauseMenu;
 
         /// <summary>
-        /// The z value the ship has to reach before the game ends
+        /// Text representing player lives
         /// </summary>
-        private float _endGameZPosition = float.MaxValue;
+        public Text LivesText;
+
+        /// <summary>
+        /// Lives property
+        /// </summary>
+        public int Lives {
+            get { return _lives; }
+            set {
+                _lives = value;
+                LivesText.text = "Lives: " + _lives;
+            }
+        }
+
+        /// <summary>
+        /// Current level
+        /// </summary>
+        public static Level CurrentLevel;
+
+        /// <summary>
+        /// Current chapter
+        /// </summary>
+        public static Chapter CurrentChapter;
 
         /// <summary>
         /// Static instance of this class
         /// </summary>
         public static GameController Instance { get; private set; }
+
+        /// <summary>
+        /// The z value the ship has to reach before the game ends
+        /// </summary>
+        private float _endGameZPosition = float.MaxValue;
+
+        private int _lives;
 
         /// <summary>
         /// Fires when game is started
@@ -76,6 +100,9 @@ namespace Assets.Scripts.Controllers {
                 Transform last = sequencer.Pieces.Last();
                 _endGameZPosition = last.position.z - last.localScale.z / 2;
             }
+
+            _lives = StartingLives;
+            Lives = _lives;
         }
 
         /// <summary>

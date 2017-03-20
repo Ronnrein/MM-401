@@ -67,7 +67,7 @@ namespace Assets.Scripts.Utils {
                 }
                 lookDirection = WorldSpace.TransformDirection(localDirection);
                 Quaternion lookRotation = Quaternion.LookRotation(Reverse ? -lookDirection : lookDirection, WorldSpace.up);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * Speed);
+                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Speed);
                 transform.localRotation = Quaternion.Euler(
                     Lock == LockDirection.X ? oldRotation.eulerAngles.x : transform.localRotation.eulerAngles.x,
                     Lock == LockDirection.Y ? oldRotation.eulerAngles.y : transform.localRotation.eulerAngles.y,

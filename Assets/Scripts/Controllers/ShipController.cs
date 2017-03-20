@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using Assets.Scripts.Utils;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.Controllers {
 
@@ -97,6 +98,7 @@ namespace Assets.Scripts.Controllers {
             _animation = Model.GetComponent<Animation>();
             _audioSource = GetComponent<AudioSource>();
             ManualVelocity = GetComponent<ManualVelocity>();
+            GetComponent<HealthController>().OnObjectDestroyed += Destroyed;
         }
 
         /// <summary>
@@ -117,13 +119,11 @@ namespace Assets.Scripts.Controllers {
         /// <param name="col">Object containing collision information</param>
         public void OnCollisionEnter(Collision col) {
 
-            // If collision is with laser do damage, otherwize destroy
-            if (col.transform.GetComponent<LaserController>() != null) {
-                // TODO: Damage logic
+            // If player is in animation or collides with shots, ignore, else kill
+            if (IsAnimated || col.transform.GetComponent<LaserController>() != null) {
                 return;
             }
-            _animation.Play("PlayerEnter");
-            GameController.Instance.Movement.ResetTarget();
+            GetComponent<HealthController>().Hit(1000);
         }
 
         /// <summary>
@@ -179,6 +179,10 @@ namespace Assets.Scripts.Controllers {
             GameController.EndLevel();
         }
 
+        /// <summary>
+        /// Get aim target by checking the object that the reticule is over at the moment
+        /// </summary>
+        /// <returns>Position in reticule</returns>
         private Vector3 GetAimTarget() {
             Ray ray = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(TargetReticule.position));
             RaycastHit hit;
@@ -186,6 +190,26 @@ namespace Assets.Scripts.Controllers {
                 return hit.point;
             }
             return TargetReticule.position;
+        }
+
+        /// <summary>
+        /// Gets called when player ship is destroyed
+        /// </summary>
+        private void Destroyed() {
+            GameController.Instance.Lives--;
+            if (GameController.Instance.Lives == 0) {
+                GameController.LoadMainMenu();
+            }
+            ResetShip();
+        }
+
+        /// <summary>
+        /// Reset ship and health
+        /// </summary>
+        private void ResetShip() {
+            _animation.Play("PlayerEnter");
+            GameController.Instance.Movement.ResetTarget();
+            GetComponent<HealthController>().ResetHealth();
         }
 
     }
