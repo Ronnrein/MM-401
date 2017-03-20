@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections;
+using UnityEngine;
 
 namespace Assets.Scripts.Utils {
 
@@ -68,6 +70,11 @@ namespace Assets.Scripts.Utils {
                 return 0f;
             }
             return Mathf.Max(-b / (2f * a), 0f);
+        }
+
+        public static IEnumerator CallAfter(Action action, float time) {
+            yield return new WaitForSeconds(time);
+            action();
         }
     }
 }

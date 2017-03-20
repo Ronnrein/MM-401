@@ -82,6 +82,11 @@ namespace Assets.Scripts.Controllers {
         private Animation _animation;
 
         /// <summary>
+        /// Health controller of ship
+        /// </summary>
+        private HealthController _health;
+
+        /// <summary>
         /// Whether or not the ship is currently animated
         /// </summary>
         public bool IsAnimated {
@@ -98,7 +103,8 @@ namespace Assets.Scripts.Controllers {
             _animation = Model.GetComponent<Animation>();
             _audioSource = GetComponent<AudioSource>();
             ManualVelocity = GetComponent<ManualVelocity>();
-            GetComponent<HealthController>().OnObjectDestroyed += Destroyed;
+            _health = GetComponent<HealthController>();
+            _health.OnObjectDestroyed += Destroyed;
         }
 
         /// <summary>
@@ -123,7 +129,7 @@ namespace Assets.Scripts.Controllers {
             if (IsAnimated || col.transform.GetComponent<LaserController>() != null) {
                 return;
             }
-            GetComponent<HealthController>().Hit(1000);
+            _health.Kill();
         }
 
         /// <summary>
@@ -131,7 +137,7 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         public void PlayEndingAnimation() {
             _animation.Play("PlayerLeave");
-            StartCoroutine(WaitForEndingAnimation(_animation["PlayerLeave"].length));
+            StartCoroutine(Helpers.CallAfter(GameController.EndLevel, _animation["PlayerLeave"].length));
         }
 
         /// <summary>
@@ -170,16 +176,6 @@ namespace Assets.Scripts.Controllers {
         }
 
         /// <summary>
-        /// Waits for ending animation to finish
-        /// </summary>
-        /// <param name="seconds">Seconds to wait</param>
-        /// <returns>Enumerator</returns>
-        private IEnumerator WaitForEndingAnimation(float seconds) {
-            yield return new WaitForSeconds(seconds);
-            GameController.EndLevel();
-        }
-
-        /// <summary>
         /// Get aim target by checking the object that the reticule is over at the moment
         /// </summary>
         /// <returns>Position in reticule</returns>
@@ -210,7 +206,15 @@ namespace Assets.Scripts.Controllers {
             _animation.Play("PlayerEnter");
             GameController.Instance.Movement.ResetTarget();
             GetComponent<HealthController>().ResetHealth();
+            GetComponent<Collider>().enabled = false;
+            StartCoroutine(Helpers.CallAfter(AnimationDone, _animation["PlayerEnter"].length));
         }
 
+        /// <summary>
+        /// Gets called when animation is done
+        /// </summary>
+        private void AnimationDone() {
+            GetComponent<Collider>().enabled = true;
+        }
     }
 }

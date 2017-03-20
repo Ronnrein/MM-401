@@ -89,5 +89,12 @@ namespace Assets.Scripts.Controllers {
         public void ResetHealth() {
             Health = StartingHealth;
         }
+
+        /// <summary>
+        /// Kills health by dealing damage equal to remaining health
+        /// </summary>
+        public void Kill() {
+            Hit(Health);
+        }
     }
 }
