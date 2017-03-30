@@ -107,7 +107,7 @@ namespace Assets.Scripts.Controllers {
                 Chapter first = LevelContainer.Instance.Chapters.First();
                 GameController.LoadLevel(first, first.Levels.First());
             });
-            GameObject levelSelectBtn = CreateButton("Level select", new Vector3(0, -offset, 0), MainBtnContainer);
+            GameObject levelSelectBtn = CreateButton("Level select", new Vector3(0, -offset, 1), MainBtnContainer);
             levelSelectBtn.GetComponent<Button>().onClick.AddListener(ToggleChapterButtons);
             GameObject quitBtn = CreateButton("Quit", new Vector3(0, -offset * 2, 0), MainBtnContainer);
             quitBtn.GetComponent<Button>().onClick.AddListener(Application.Quit);
