@@ -124,7 +124,7 @@ namespace Assets.Scripts.Controllers {
             GameObject button = Instantiate(ButtonPrefab);
             button.transform.SetParent(parent);
             button.transform.localPosition = position;
-            button.transform.GetChild(0).GetComponent<Text>().text = text;
+            button.transform.GetComponent<Text>().text = text;
             return button;
         }
 
