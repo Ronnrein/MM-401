@@ -1,0 +1,177 @@
+fileFormatVersion: 2
+guid: 73e7f0b170c0d954aa4bf8cfd8ce0d38
+timeCreated: 1492256958
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Cylinder14
+    100002: Cylinder14_Cylinder10
+    100004: Cylinder14_Cylinder15
+    100006: Cylinder14_Cylinder20
+    100008: Cylinder38
+    100010: Cylinder38_Cylinder16
+    100012: Cylinder38_Cylinder17
+    100014: Cylinder38_Cylinder18
+    100016: Cylinder38_Cylinder19
+    100018: Cylinder38_Cylinder21
+    100020: Cylinder38_Cylinder22
+    100022: Cylinder38_Cylinder30
+    100024: Cylinder38_Cylinder31
+    100026: Cylinder38_Cylinder32
+    100028: Cylinder38_Cylinder33
+    100030: Cylinder38_Cylinder34
+    100032: Cylinder38_Cylinder35
+    100034: Cylinder38_Cylinder36
+    100036: Cylinder38_Cylinder37
+    100038: Cylinder38_Cylinder39
+    100040: //RootNode
+    400000: Cylinder14
+    400002: Cylinder14_Cylinder10
+    400004: Cylinder14_Cylinder15
+    400006: Cylinder14_Cylinder20
+    400008: Cylinder38
+    400010: Cylinder38_Cylinder16
+    400012: Cylinder38_Cylinder17
+    400014: Cylinder38_Cylinder18
+    400016: Cylinder38_Cylinder19
+    400018: Cylinder38_Cylinder21
+    400020: Cylinder38_Cylinder22
+    400022: Cylinder38_Cylinder30
+    400024: Cylinder38_Cylinder31
+    400026: Cylinder38_Cylinder32
+    400028: Cylinder38_Cylinder33
+    400030: Cylinder38_Cylinder34
+    400032: Cylinder38_Cylinder35
+    400034: Cylinder38_Cylinder36
+    400036: Cylinder38_Cylinder37
+    400038: Cylinder38_Cylinder39
+    400040: //RootNode
+    2300000: Cylinder14
+    2300002: Cylinder14_Cylinder10
+    2300004: Cylinder14_Cylinder15
+    2300006: Cylinder14_Cylinder20
+    2300008: Cylinder38
+    2300010: Cylinder38_Cylinder16
+    2300012: Cylinder38_Cylinder17
+    2300014: Cylinder38_Cylinder18
+    2300016: Cylinder38_Cylinder19
+    2300018: Cylinder38_Cylinder21
+    2300020: Cylinder38_Cylinder22
+    2300022: Cylinder38_Cylinder30
+    2300024: Cylinder38_Cylinder31
+    2300026: Cylinder38_Cylinder32
+    2300028: Cylinder38_Cylinder33
+    2300030: Cylinder38_Cylinder34
+    2300032: Cylinder38_Cylinder35
+    2300034: Cylinder38_Cylinder36
+    2300036: Cylinder38_Cylinder37
+    2300038: Cylinder38_Cylinder39
+    3300000: Cylinder14
+    3300002: Cylinder14_Cylinder10
+    3300004: Cylinder14_Cylinder15
+    3300006: Cylinder14_Cylinder20
+    3300008: Cylinder38
+    3300010: Cylinder38_Cylinder16
+    3300012: Cylinder38_Cylinder17
+    3300014: Cylinder38_Cylinder18
+    3300016: Cylinder38_Cylinder19
+    3300018: Cylinder38_Cylinder21
+    3300020: Cylinder38_Cylinder22
+    3300022: Cylinder38_Cylinder30
+    3300024: Cylinder38_Cylinder31
+    3300026: Cylinder38_Cylinder32
+    3300028: Cylinder38_Cylinder33
+    3300030: Cylinder38_Cylinder34
+    3300032: Cylinder38_Cylinder35
+    3300034: Cylinder38_Cylinder36
+    3300036: Cylinder38_Cylinder37
+    3300038: Cylinder38_Cylinder39
+    4300000: Cylinder14
+    4300002: Cylinder14_Cylinder10
+    4300004: Cylinder14_Cylinder15
+    4300006: Cylinder14_Cylinder20
+    4300008: Cylinder38
+    4300010: Cylinder38_Cylinder16
+    4300012: Cylinder38_Cylinder17
+    4300014: Cylinder38_Cylinder18
+    4300016: Cylinder38_Cylinder19
+    4300018: Cylinder38_Cylinder21
+    4300020: Cylinder38_Cylinder22
+    4300022: Cylinder38_Cylinder30
+    4300024: Cylinder38_Cylinder31
+    4300026: Cylinder38_Cylinder32
+    4300028: Cylinder38_Cylinder33
+    4300030: Cylinder38_Cylinder34
+    4300032: Cylinder38_Cylinder35
+    4300034: Cylinder38_Cylinder36
+    4300036: Cylinder38_Cylinder37
+    4300038: Cylinder38_Cylinder39
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
