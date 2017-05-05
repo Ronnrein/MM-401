@@ -126,7 +126,11 @@ namespace Assets.Scripts.Controllers {
         public void OnCollisionEnter(Collision col) {
 
             // If player is in animation or collides with shots, ignore, else kill
-            if (IsAnimated || col.transform.GetComponent<LaserController>() != null) {
+            if (IsAnimated) {
+                return;
+            }
+            if (col.transform.GetComponent<LaserController>() != null) {
+                _animation.Play("Hit");
                 return;
             }
             _health.Kill();
