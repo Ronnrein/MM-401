@@ -187,7 +187,11 @@ namespace Assets.Scripts.Controllers {
             Ray ray = Camera.main.ScreenPointToRay(Camera.main.WorldToScreenPoint(TargetReticule.position));
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit)) {
-                return hit.point;
+                HealthController health = hit.transform.GetComponent<HealthController>();
+                if (health == null || hit.transform.tag != "Hitscan") {
+                    return hit.point;
+                }
+                health.Hit(1);
             }
             return TargetReticule.position;
         }
