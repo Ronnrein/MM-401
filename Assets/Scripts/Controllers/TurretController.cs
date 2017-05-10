@@ -64,6 +64,7 @@ namespace Assets.Scripts.Controllers {
         public void Start () {
             GameObject tempShot = Instantiate(ProjectilePrefab, Vector3.zero, Quaternion.identity);
             _projectileSpeed = tempShot.GetComponent<LaserController>().MovementSpeed;
+            tempShot.GetComponent<Collider>().enabled = false;
             Destroy(tempShot);
             _player = GameController.Instance.Player;
             _lastShot = Time.time;
