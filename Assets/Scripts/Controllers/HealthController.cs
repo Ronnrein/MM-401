@@ -14,6 +14,11 @@ namespace Assets.Scripts.Controllers {
         public float StartingHealth = 5;
 
         /// <summary>
+        /// Score to award for destroying this object
+        /// </summary>
+        public float Score = 0f;
+
+        /// <summary>
         /// If checked will destroy object rather than call the event
         /// </summary>
         public bool ObjectDestroy;
@@ -80,6 +85,7 @@ namespace Assets.Scripts.Controllers {
                 }
                 GameObject explosion = Instantiate(ExplosionPrefab, transform.position, Quaternion.identity);
                 Destroy(explosion, 5f);
+                GameController.Instance.Score += Score;
             }
         }
 

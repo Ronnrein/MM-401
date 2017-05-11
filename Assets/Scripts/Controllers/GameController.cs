@@ -18,6 +18,11 @@ namespace Assets.Scripts.Controllers {
         public int StartingLives = 3;
 
         /// <summary>
+        /// Multiplier for score based on seconds played
+        /// </summary>
+        public float ScoreMultiplier = 1f;
+
+        /// <summary>
         /// The ship controller
         /// </summary>
         public ShipController Player;
@@ -53,6 +58,11 @@ namespace Assets.Scripts.Controllers {
         public Text LivesText;
 
         /// <summary>
+        /// Text representing player score
+        /// </summary>
+        public Text ScoreText;
+
+        /// <summary>
         /// Lives property
         /// </summary>
         public int Lives {
@@ -63,6 +73,17 @@ namespace Assets.Scripts.Controllers {
                 if (_lives <= 0) {
                     GameOver();
                 }
+            }
+        }
+
+        /// <summary>
+        /// Score property
+        /// </summary>
+        public float Score {
+            get { return _score; }
+            set {
+                _score = value;
+                ScoreText.text = "Score: " + _score.ToString("F2");
             }
         }
 
@@ -86,7 +107,15 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         private float _endGameZPosition = float.MaxValue;
 
+        /// <summary>
+        /// Amount of lives
+        /// </summary>
         private int _lives;
+
+        /// <summary>
+        /// Total score
+        /// </summary>
+        private float _score;
 
         /// <summary>
         /// Fires when game is started
@@ -128,6 +157,7 @@ namespace Assets.Scripts.Controllers {
             if (Player.transform.position.z > _endGameZPosition) {
                 Player.PlayEndingAnimation();
             }
+            Score += Time.deltaTime * ScoreMultiplier;
         }
 
         /// <summary>

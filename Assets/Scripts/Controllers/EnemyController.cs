@@ -44,6 +44,9 @@ namespace Assets.Scripts.Controllers {
             }
         }
 
+        /// <summary>
+        /// Gets called when animatiion if finished
+        /// </summary>
         public void IntroFinished() {
             GetComponent<Collider>().enabled = true;
         }

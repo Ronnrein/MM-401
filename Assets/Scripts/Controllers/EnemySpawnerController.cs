@@ -16,7 +16,7 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Fires when game is started, after Awake
         /// </summary>
-        void Start () {
+        public void Start() {
             _spawner = GetComponent<ObjectSpawner>();
         }
 
