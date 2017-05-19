@@ -208,7 +208,7 @@ namespace Assets.Scripts.Controllers {
         public static void LoadLevel(Chapter chapter, Level level) {
             CurrentChapter = chapter;
             CurrentLevel = level;
-            SceneManager.LoadScene("Scenes/Levels/" + level.Scene);
+            SceneManager.LoadScene("Scenes/LoadingScreen");
         }
 
         /// <summary>
