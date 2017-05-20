@@ -7,6 +7,11 @@
           <Text>Chapter 1 level 1 text</Text>
           <Scene>Chapter01/Level01</Scene>
         </Level>
+        <Level id="2">
+          <Name>Chapter 1: Level 2</Name>
+          <Text>Chapter 1 level 2 text</Text>
+          <Scene>Chapter01/Level02</Scene>
+        </Level>
       </Levels>
     </Chapter>
   </Chapters>
