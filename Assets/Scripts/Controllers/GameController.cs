@@ -215,7 +215,16 @@ namespace Assets.Scripts.Controllers {
         /// Ends level
         /// </summary>
         public static void EndLevel() {
-            // TODO, GO TO NEW LEVEL
+            Level nextLevel = CurrentChapter.Levels.Find(x => x.Id == CurrentLevel.Id + 1);
+            if (nextLevel != null) {
+                LoadLevel(CurrentChapter, nextLevel);
+                return;
+            }
+            Chapter nextChapter = LevelContainer.Instance.Chapters.Find(x => x.Id == CurrentChapter.Id + 1);
+            if (nextChapter != null && nextChapter.Levels.Count > 0) {
+                LoadLevel(nextChapter, nextChapter.Levels.First());
+                return;
+            }
             LoadMainMenu();
         }
 
