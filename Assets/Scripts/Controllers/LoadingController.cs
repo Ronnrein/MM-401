@@ -15,6 +15,16 @@ namespace Assets.Scripts.Controllers {
         public Slider ProgressBar;
 
         /// <summary>
+        /// The text element showing the level name
+        /// </summary>
+        public Text LevelText;
+
+        /// <summary>
+        /// The button to start
+        /// </summary>
+        public Transform LoadButton;
+
+        /// <summary>
         /// The loader async operation
         /// </summary>
         private AsyncOperation _loader;
@@ -28,6 +38,8 @@ namespace Assets.Scripts.Controllers {
                     "Scenes/Levels/" + GameController.CurrentLevel.Scene,
                     LoadSceneMode.Single
                 );
+            _loader.allowSceneActivation = false;
+            LevelText.text = "Chapter " + GameController.CurrentChapter.Id + ": Level " + GameController.CurrentLevel.Id;
         }
 
         /// <summary>
@@ -35,6 +47,17 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         public void Update () {
             ProgressBar.value = _loader.progress;
+            if (ProgressBar.gameObject.activeSelf && _loader.progress >= 0.9f) {
+                ProgressBar.gameObject.SetActive(false);
+                LoadButton.gameObject.SetActive(true);
+            }
+        }
+
+        /// <summary>
+        /// Function to load the level
+        /// </summary>
+        public void Load() {
+            _loader.allowSceneActivation = true;
         }
 
     }

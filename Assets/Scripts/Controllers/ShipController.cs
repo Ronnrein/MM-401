@@ -141,7 +141,7 @@ namespace Assets.Scripts.Controllers {
         /// </summary>
         public void PlayEndingAnimation() {
             _animation.Play("PlayerLeave");
-            Helpers.CallAfter(GameController.EndLevel, _animation["PlayerLeave"].length);
+            Helpers.CallAfter(GameController.Instance.EndLevel, _animation["PlayerLeave"].length);
         }
 
         /// <summary>
