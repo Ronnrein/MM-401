@@ -135,6 +135,7 @@ namespace Assets.Scripts.Controllers {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
             LevelText.text = CurrentLevel.Name;
+            PauseMenuText.text = CurrentLevel.Name;
 
             // Try to get the position of the end of the level
             LevelSequencer sequencer = GetComponent<LevelSequencer>();
@@ -214,7 +215,22 @@ namespace Assets.Scripts.Controllers {
         /// <summary>
         /// Ends level
         /// </summary>
-        public static void EndLevel() {
+        public void EndLevel() {
+            PauseMenuContinueButton.GetComponent<Text>().text = "Next level";
+            Button b = PauseMenuContinueButton.GetComponent<Button>();
+            b.onClick.RemoveAllListeners();
+            b.onClick.AddListener(NextLevel);
+            PauseMenuText.text = "Score: " + _score.ToString("F2");
+            TogglePause(true);
+        }
+
+        /// <summary>
+        /// Goes to next level, if exists
+        /// </summary>
+        public void NextLevel() {
+            Time.timeScale = 1;
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             Level nextLevel = CurrentChapter.Levels.Find(x => x.Id == CurrentLevel.Id + 1);
             if (nextLevel != null) {
                 LoadLevel(CurrentChapter, nextLevel);
